@@ -12,7 +12,8 @@ namespace Shout
 
 		public LoginPage ()
 		{
-			BackgroundColor = Color.Silver;
+			BackgroundImage = "landing_bg";
+
 			Content = new StackLayout { 
 				HorizontalOptions = LayoutOptions.CenterAndExpand,
 				VerticalOptions = LayoutOptions.CenterAndExpand,

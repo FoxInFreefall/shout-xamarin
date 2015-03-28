@@ -9,19 +9,29 @@
     <Import_RootNamespace>Shout</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Shout.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\UserModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\LandingPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\LoginPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\RegistrationPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ApiManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Globals.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\SamplePage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ProjectModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\SampleProjectPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Models\ProjectModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Models\UserModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\LandingPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\LoginForm.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\LoginPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\RegistrationPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\SamplePage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\SampleProjectPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\ButtonFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Globals.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Shout.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Fox\Models\DictModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Fox\Pages\BasePage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Fox\Views\BaseRelativeLayout.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Fox\Views\FormView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Fox\ApiManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\ShoutApiManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Models\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Pages\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Aux\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Fox\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Fox\Models\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Fox\Pages\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Fox\Views\" />
   </ItemGroup>
 </Project>

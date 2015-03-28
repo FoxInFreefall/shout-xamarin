@@ -20,6 +20,10 @@ namespace Shout
 					new Button { Image = "icon", Command = new Command (async () => await Submit (projectNameField.Text)) }
 				}
 			};
+
+			foreach (var pot in App.User.PotentialProjects) {
+				AddProjectLabel (pot);
+			}
 		}
 
 		private void AddProjectLabel (ProjectModel project)
