@@ -29,7 +29,7 @@ namespace Fox
 
 		protected void RegisterAuthenticationToken (string token)
 		{
-			client.DefaultRequestHeaders.Add ("Authorization", "Token token=" + token);
+			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue ("Token", "token=" + token);
 		}
 
 
