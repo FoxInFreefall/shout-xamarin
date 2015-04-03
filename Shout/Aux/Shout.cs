@@ -1,11 +1,9 @@
 ﻿using System;
-
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Fox;
+
+using System.Diagnostics;
 
 namespace Shout
 {
@@ -100,18 +98,16 @@ namespace Shout
 
 		public static async Task<ProjectModel> CreateProject (string projectName)
 		{
-			//TODO: pls no, fix
 			DictModel response = await Instance.ApiManager.CreateProject (projectName);
-			if (response.ToString ().Contains ("id:")) {
-				return User.AddProject (response);
-			}
-			return null;
+			response.EnsureValid ();
+
+			return User.AddProject (response);
 		}
 
 		public static async Task DestroyProject (int projectId)
 		{
-			//TODO: pls fix
-			var response = await Instance.ApiManager.DestroyProject (projectId);
+			DictModel response = await Instance.ApiManager.DestroyProject (projectId);
+			response.EnsureValid ();
 		}
 
 		public static async Task<bool> InviteUserToProject (string email, int projectId)

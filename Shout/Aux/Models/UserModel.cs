@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Fox;
+
+using System.Diagnostics;
 
 namespace Shout
 {
@@ -45,9 +46,9 @@ namespace Shout
 			return project;
 		}
 
-		public ProjectModel AddPotentialProject (string json)
+		public ProjectModel AddPotentialProject (DictModel dict)
 		{
-			var project = new ProjectModel (json);
+			var project = new ProjectModel (dict);
 			_PotentialProjects.Add (project);
 			return project;
 		}
