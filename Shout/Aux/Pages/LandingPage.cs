@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Fox;
@@ -40,6 +39,7 @@ namespace Shout
 				if (dict != null)
 					await App.Login (dict.s ("email"), dict.s ("password"));
 			} catch (Exception ex) {
+				Debug.WriteLine (ex.ToString ());
 				await DisplayAlert ("Error", ex.Message, "OK");
 			}
 		}

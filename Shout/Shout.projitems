@@ -12,10 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Models\ProjectModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Models\UserModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\LandingPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\LoginForm.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\LoginPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\RegistrationPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\SamplePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\SampleProjectPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\ButtonFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Globals.cs" />
@@ -26,6 +23,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Fox\Views\FormView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Fox\ApiManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\ShoutApiManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\ProjectPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\ProjectListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\RootSessionPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Fragments\TaskListFragment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Forms\LoginForm.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Fragments\MasterFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Aux\" />
@@ -33,5 +36,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Fox\Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)Fox\Pages\" />
     <Folder Include="$(MSBuildThisFileDirectory)Fox\Views\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Aux\Fragments\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Aux\Forms\" />
   </ItemGroup>
 </Project>

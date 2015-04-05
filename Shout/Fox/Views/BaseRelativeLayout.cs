@@ -1,6 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
 
+using System.Diagnostics;
+
 namespace Fox
 {
 	public class BaseRelativeLayout : RelativeLayout
@@ -25,7 +27,7 @@ namespace Fox
 				});
 			else if (x >= 0)
 				xConstraint = Constraint.Constant (x);
-			else if (x < -1)
+			else if (x <= -1)
 				xConstraint = Constraint.RelativeToParent ((parent) => {
 					return parent.Width + x;
 				});
@@ -37,7 +39,7 @@ namespace Fox
 				});
 			else if (y >= 0)
 				yConstraint = Constraint.Constant (y);
-			else if (y < -1)
+			else if (y <= -1)
 				yConstraint = Constraint.RelativeToParent ((parent) => {
 					return parent.Height + y;
 				});

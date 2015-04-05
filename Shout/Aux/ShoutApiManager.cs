@@ -37,6 +37,11 @@ namespace Shout
 			return response;
 		}
 
+		public void Logout ()
+		{
+			ClearAuthenticationToken ();
+		}
+
 		public async Task<DictModel> Register (string email, string password)
 		{
 			DictModel dict = new DictModel ("user");

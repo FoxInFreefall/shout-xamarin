@@ -2,7 +2,6 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Text;
 
 using System.Diagnostics;
 
@@ -12,6 +11,13 @@ namespace Fox
 	{
 		/*---------- PUBLIC ----------*/
 		public enum RequestMethod { GET, POST, PUT, DELETE }
+
+
+		/*---------- PROPERTIES ----------*/
+		public string AuthenticationToken {
+			get { return ISave.Instance.GetString ("authentication_token"); }
+			set { ISave.Instance.PutString ("authentication_token", value); }
+		}
 
 
 		/*---------- PRIVATE ----------*/
@@ -25,11 +31,19 @@ namespace Fox
 			client = new HttpClient ();
 			client.BaseAddress = new Uri (baseAddress);
 			client.DefaultRequestHeaders.Add ("Accept", "application/json");
+			RegisterAuthenticationToken (AuthenticationToken);
 		}
 
 		protected void RegisterAuthenticationToken (string token)
 		{
+			AuthenticationToken = token;
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue ("Token", "token=" + token);
+		}
+
+		protected void ClearAuthenticationToken ()
+		{
+			ISave.Instance.Remove ("authentication_token");
+			client.DefaultRequestHeaders.Authorization = null;
 		}
 
 
@@ -80,7 +94,6 @@ namespace Fox
 			parameters = parameters ?? new DictModel ();
 			var content = parameters.ToContent ();
 			content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-//			content.Headers.Add ("Authorization", "Basic Token token=p5gymjQqyQ-3UpiRNAFT");
 
 			return await client.PostAsync (requestUri, content);
 		}

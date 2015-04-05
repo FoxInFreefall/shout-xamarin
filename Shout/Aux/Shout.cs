@@ -28,12 +28,16 @@ namespace Shout
 		{
 			Instance = this;
 
+			User = new UserModel ();
 			ApiManager = ShoutApiManager.Instance;
 
 			ButtonFactory.Template.BackgroundColor = Color.Gray;
 			ButtonFactory.Template.BorderRadius = 5;
 
-			UseRootPage (new LandingPage ());
+			if (ApiManager.AuthenticationToken != "")
+				UseRootPage (new RootSessionPage ());
+			else
+				UseRootPage (new LandingPage ());
 		}
 
 
@@ -59,7 +63,10 @@ namespace Shout
 
 		public static void UseRootPage (Page page)
 		{
-			Instance.MainPage = new NavigationPage (page);
+			Instance.MainPage = new NavigationPage (page) {
+				BarBackgroundColor = Color.FromHex ("F6B11A"),
+				BarTextColor = Color.White
+			};
 			Instance.Navigation = Instance.MainPage.Navigation;
 		}
 
@@ -76,14 +83,30 @@ namespace Shout
 
 		/********** CONTROL PANEL **********/
 
+		public static async Task TryAutoLogin ()
+		{
+			DictModel response = await Instance.ApiManager.AutoLogin ();
+			Debug.WriteLine ("AutoLogin response: " + response.ToString ());
+			response.EnsureValid ();
+
+			User.UpdateWithJson (response.s ("user"));
+		}
+
 		public static async Task Login (string email, string password)
 		{
 			DictModel response = await Instance.ApiManager.Login (email, password);
 			Debug.WriteLine ("Login response: " + response.ToString ());
 			response.EnsureValid ();
 
-			User = new UserModel (response.s ("user"));
-			UseRootPage (new SamplePage ());
+			User.UpdateWithJson (response.s ("user"));
+			UseRootPage (new RootSessionPage ());
+		}
+
+		public static void Logout ()
+		{
+			Instance.ApiManager.Logout ();
+			User.Reset ();
+			UseRootPage (new LandingPage ());
 		}
 
 		public static async Task Register (string email, string password)
@@ -92,8 +115,7 @@ namespace Shout
 			DictModel response = await Instance.ApiManager.Register (email, password);
 			response.EnsureValid ();
 
-			User = new UserModel (response.s ("data"));
-			UseRootPage (new SamplePage ());
+			User.UpdateWithJson (response.s ("user"));
 		}
 
 		public static async Task<ProjectModel> CreateProject (string projectName)

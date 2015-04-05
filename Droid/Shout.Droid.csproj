@@ -72,6 +72,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Fox\Interfaces\ISave.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -82,6 +83,8 @@
   <ItemGroup>
     <Folder Include="Resources\layout\" />
     <Folder Include="Resources\values\" />
+    <Folder Include="Fox\" />
+    <Folder Include="Fox\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon.png" />
@@ -89,6 +92,11 @@
     <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable\landing_bg.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\bar_icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\bar_icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\bar_icon.png" />
+    <AndroidResource Include="Resources\drawable\bar_icon.png" />
+    <AndroidResource Include="Resources\drawable\no_icon.png" />
   </ItemGroup>
   <Import Project="..\Shout\Shout.projitems" Label="Shared" Condition="Exists('..\Shout\Shout.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

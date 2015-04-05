@@ -44,8 +44,8 @@ namespace Fox
 		public List<object> l (string key, bool shouldRemove = false)
 		{
 			object obj = this [key];
-			if (obj is List<object>)
-				this [key] = JsonConvert.DeserializeObject<List<object>> (this [key].ToString ());
+			if (! (obj is List<object>))
+				this [key] = JsonConvert.DeserializeObject<List<object>> (this [key].ToString ()) ?? new List<object> ();
 			var give = this [key] as List<object>;
 			if (shouldRemove)
 				this.Remove (key);

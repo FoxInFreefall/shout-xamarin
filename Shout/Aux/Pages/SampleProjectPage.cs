@@ -39,7 +39,6 @@ namespace Shout
 		private async Task Destroy ()
 		{
 			await App.DestroyProject (project.Id);
-			App.UseRootPage (new SamplePage ());
 		}
 
 		private async Task Submit (string email)

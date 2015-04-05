@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Fox
@@ -20,7 +20,6 @@ namespace Fox
 		public BasePage ()
 		{
 			Content = new BaseRelativeLayout ();
-
 			obscure = new BoxView {
 				BackgroundColor = Color.Black,
 				Opacity = 0
