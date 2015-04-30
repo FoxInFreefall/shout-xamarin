@@ -9,6 +9,7 @@ namespace Shout
 	public class ShoutApiManager : ApiManager
 	{
 		/*---------- SINGLETON ----------*/
+		//TODO: one-time access (returns null after first access)
 		public static readonly ShoutApiManager Instance = new ShoutApiManager ();
 
 
@@ -73,6 +74,35 @@ namespace Shout
 			dict.Add ("project_id", projectId.ToString ());
 
 			return await MakeRequestAsync (Globals.INVITATIONS_URI, dict, RequestMethod.POST);
+		}
+
+		public async Task<DictModel> CreateTask (TaskModel task)
+		{
+			//TODO: is there a way to bake this in?
+			if (task.ProjectId == default(int))
+				throw new Exception ("Task doesn't belong to a project: aborting save.");
+			
+			DictModel dict = new DictModel ("task");
+			dict.Add ("title", task.Title);
+			dict.Add ("description", task.Description);
+
+			string uri = Globals.PROJECTS_URI + "/" + task.ProjectId + "/" + Globals.TASKS_URI;
+			return await MakeRequestAsync (uri, dict, RequestMethod.POST);
+		}
+
+		public async Task<DictModel> UpdateTask (TaskModel task)
+		{
+			//TODO: is there a way to bake this in?
+			if (task.ProjectId == default(int))
+				throw new Exception ("Task doesn't belong to a project: aborting save.");
+			
+			DictModel dict = new DictModel ("task");
+			dict.Add ("title", task.Title);
+			dict.Add ("description", task.Description);
+
+			//TODO: use dynamic uri's like _path's in Ruby
+			string uri = Globals.PROJECTS_URI + "/" + task.ProjectId + "/" + Globals.TASKS_URI + "/" + task.Id;
+			return await MakeRequestAsync (uri, dict, RequestMethod.PUT);
 		}
 	}
 }

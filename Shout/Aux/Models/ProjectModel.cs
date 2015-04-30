@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Fox;
 
 namespace Shout
@@ -9,6 +10,12 @@ namespace Shout
 
 		public int Id { get; private set; }
 		public string Name { get; private set; }
+		public IReadOnlyList<TaskModel> Tasks { get { return _Tasks.AsReadOnly (); } }
+
+
+		/********** PRIVATE **********/
+
+		private List<TaskModel> _Tasks = new List<TaskModel> ();
 
 
 		/********** CONSTRUCTOR **********/

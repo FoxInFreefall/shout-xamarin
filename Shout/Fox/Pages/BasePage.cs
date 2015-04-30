@@ -52,6 +52,16 @@ namespace Fox
 			await obscure.FadeTo (0, fadeTime);
 			Content.Children.Remove (form);
 		}
+
+		public void SendObject (object obj)
+		{
+			ReceivedObject (obj);
+		}
+
+		protected virtual void ReceivedObject (object obj)
+		{
+
+		}
 	}
 }
 

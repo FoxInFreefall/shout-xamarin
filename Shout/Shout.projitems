@@ -29,6 +29,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Fragments\TaskListFragment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Forms\LoginForm.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Fragments\MasterFragment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Models\TaskModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\ModifyTaskPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Aux\" />

@@ -80,6 +80,23 @@ namespace Shout
 			await Instance.Navigation.PopAsync ();
 		}
 
+		public static async Task GotoModalPage (Page page)
+		{
+			await Instance.Navigation.PushModalAsync (page);
+		}
+
+		public static async Task PopModalPage (object passBack = null)
+		{
+			if (passBack != null) {
+				var stack = Instance.Navigation.NavigationStack;
+				var previousPage = (stack.Count > 1) ? stack [stack.Count - 2] : null;
+				if (previousPage is BasePage)
+					(previousPage as BasePage).SendObject (passBack);
+			}
+				
+			await Instance.Navigation.PopModalAsync ();
+		}
+
 
 		/********** CONTROL PANEL **********/
 
@@ -137,6 +154,18 @@ namespace Shout
 			//TODO: also pls fix
 			var response = await Instance.ApiManager.InviteUserToProject (email, projectId);
 			return !response.ToString ().Contains ("errors:");
+		}
+
+		public static async Task<TaskModel> SaveTask (TaskModel task)
+		{
+			DictModel response;
+			if (task.Id == default(int))
+				response = await Instance.ApiManager.CreateTask (task);
+			else
+				response = await Instance.ApiManager.UpdateTask (task);
+			response.EnsureValid ();
+
+			return task;
 		}
 	}
 }
