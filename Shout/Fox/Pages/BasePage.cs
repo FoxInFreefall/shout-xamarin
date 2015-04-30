@@ -10,7 +10,7 @@ namespace Fox
 		private uint fadeTime = 150;
 
 		private View obscure;
-		private FormView form;
+		private View form;
 
 		public new BaseRelativeLayout Content { 
 			get { return base.Content as BaseRelativeLayout; }
@@ -24,17 +24,25 @@ namespace Fox
 				BackgroundColor = Color.Black,
 				Opacity = 0
 			};
+
+			var tap = new TapGestureRecognizer ();
+			tap.Tapped += (sender, e) => { if (form != null) RemoveForm (); };
+			obscure.GestureRecognizers.Add (tap);
+
 			Content.AddView (obscure);
 		}
 
 		public async Task<DictModel> OverlayForm (FormView v, double x = 0, double y = 0, double w = 1, double h = 1)
 		{
-			form = v;
+			var formScroll = new ScrollView ();
+			formScroll.Content = v;
+
+			form = formScroll;
 
 			Content.RaiseChild (obscure);
-			Content.AddView (v, x, y, w, h);
+			Content.AddView (form, 0, 0, 1, 1);
 
-			v.Opacity = 0;
+			form.Opacity = 0;
 
 			await obscure.FadeTo (0.6, fadeTime);
 			await form.FadeTo (1, fadeTime, Easing.CubicOut);
@@ -51,6 +59,7 @@ namespace Fox
 			await form.FadeTo (0, fadeTime, Easing.CubicIn);
 			await obscure.FadeTo (0, fadeTime);
 			Content.Children.Remove (form);
+			Content.LowerChild (obscure);
 		}
 
 		public void SendObject (object obj)

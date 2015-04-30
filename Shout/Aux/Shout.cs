@@ -140,7 +140,7 @@ namespace Shout
 			DictModel response = await Instance.ApiManager.CreateProject (projectName);
 			response.EnsureValid ();
 
-			return User.AddProject (response);
+			return User.AddProject (response.s ("project"));
 		}
 
 		public static async Task DestroyProject (int projectId)
