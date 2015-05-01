@@ -26,7 +26,7 @@ namespace Fox
 			};
 
 			var tap = new TapGestureRecognizer ();
-			tap.Tapped += (sender, e) => { if (form != null) RemoveForm (); };
+			tap.Tapped += async (sender, e) => await RemoveForm ();
 			obscure.GestureRecognizers.Add (tap);
 
 			Content.AddView (obscure);
@@ -56,9 +56,11 @@ namespace Fox
 
 		public async Task RemoveForm ()
 		{
-			await form.FadeTo (0, fadeTime, Easing.CubicIn);
+			if (form != null) {
+				await form.FadeTo (0, fadeTime, Easing.CubicIn);
+				Content.Children.Remove (form);
+			}
 			await obscure.FadeTo (0, fadeTime);
-			Content.Children.Remove (form);
 			Content.LowerChild (obscure);
 		}
 

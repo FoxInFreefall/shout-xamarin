@@ -47,6 +47,11 @@ namespace Shout
 			return project;
 		}
 
+		public void RemoveProject (ProjectModel p)
+		{
+			_Projects.Remove (p);
+		}
+
 		public ProjectModel AddPotentialProject (DictModel dict)
 		{
 			var project = new ProjectModel (dict);

@@ -11,6 +11,9 @@ namespace Shout
 	{
 		private FormView projectForm = new ProjectForm ();
 		private ListView list;
+		private Button leaveProjectButton;
+		private Button addProjectButton;
+		private bool leaveProjectMode = false;
 
 		public ProjectListPage ()
 		{
@@ -31,9 +34,13 @@ namespace Shout
 
 			Content.AddView (list, 0, 0, 1, 1);
 
-			var addTaskButton = ButtonFactory.Make ("+");
-			addTaskButton.Clicked += async (sender, e) => await ShowProjectForm ();
-			Content.AddView (addTaskButton, 0.5, -75, 50, 50);
+			leaveProjectButton = ButtonFactory.Make ("-");
+			leaveProjectButton.Clicked += (sender, e) => LeaveProjectPressed ();
+			Content.AddView (leaveProjectButton, 0.4, -75, 50, 50);
+
+			addProjectButton = ButtonFactory.Make ("+");
+			addProjectButton.Clicked += async (sender, e) => await ShowProjectForm ();
+			Content.AddView (addProjectButton, 0.6, -75, 50, 50);
 		}
 
 		private void RefreshList ()
@@ -42,13 +49,24 @@ namespace Shout
 			list.EndRefresh ();
 		}
 
+		private void LeaveProjectPressed ()
+		{
+			if (!leaveProjectMode) {
+				leaveProjectButton.Text = "X";
+				addProjectButton.IsEnabled = false;
+			} else {
+				leaveProjectButton.Text = "-";
+				addProjectButton.IsEnabled = true;
+			}
+			leaveProjectMode ^= true;
+		}
+
 		private async Task ShowProjectForm ()
 		{
 			DictModel dict = await OverlayForm (projectForm);
 
 			try {
 				if (dict != null) {
-					Debug.WriteLine (dict.ToString ());
 					await App.CreateProject (dict.s ("title"));
 					list.BeginRefresh ();
 				}
@@ -62,8 +80,18 @@ namespace Shout
 		{
 			var p = (sender.SelectedItem as ProjectModel);
 			if (p != null) {
-				sender.SelectedItem = null;
-				await App.GotoPage (new ProjectPage (p));
+				
+				if (!leaveProjectMode) {
+					sender.SelectedItem = null;
+					await App.GotoPage (new ProjectPage (p));
+				} else {
+					bool success = await DisplayAlert ("Leaving " + p.Name, "Are you sure you want to leave this project?", "Certainly", "Nevermind");
+					sender.SelectedItem = null;
+					if (success) {
+						await App.LeaveProject (p);
+						list.BeginRefresh ();
+					}
+				}
 			}
 		}
 	}

@@ -13,7 +13,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Models\UserModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\LandingPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\RegistrationPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\SampleProjectPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\ButtonFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Globals.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Shout.cs" />

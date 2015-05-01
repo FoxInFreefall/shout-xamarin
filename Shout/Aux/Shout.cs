@@ -143,10 +143,12 @@ namespace Shout
 			return User.AddProject (response.s ("project"));
 		}
 
-		public static async Task DestroyProject (int projectId)
+		public static async Task LeaveProject (ProjectModel project)
 		{
-			DictModel response = await Instance.ApiManager.DestroyProject (projectId);
+			DictModel response = await Instance.ApiManager.LeaveProject (project.Id);
 			response.EnsureValid ();
+
+			User.RemoveProject (project);
 		}
 
 		public static async Task<bool> InviteUserToProject (string email, int projectId)

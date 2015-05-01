@@ -60,6 +60,11 @@ namespace Shout
 			return await MakeRequestAsync (Globals.PROJECTS_URI, dict, RequestMethod.POST);
 		}
 
+		public async Task<DictModel> LeaveProject (int projectId)
+		{
+			return await MakeRequestAsync (Globals.PROJECTS_URI + "/" + projectId + "/" + Globals.COLLABORATION_URI, null, RequestMethod.DELETE);
+		}
+
 		public async Task<DictModel> DestroyProject (int projectId)
 		{
 			var requestUri = Globals.PROJECTS_URI + "/" + projectId;

@@ -33,6 +33,7 @@ namespace Shout
 			emailEntry = new Entry { Placeholder = "email" };
 			passwordEntry = new Entry { Placeholder = "password", IsPassword = true };
 			emailEntry.Completed += (sender, e) => passwordEntry.Focus ();
+			passwordEntry.Completed += (sender, e) => Submit ();
 			fields.Children.Add (emailEntry);
 			fields.Children.Add (passwordEntry);
 			form.Children.Add (fields);

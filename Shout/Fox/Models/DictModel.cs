@@ -12,7 +12,7 @@ namespace Fox
 		/********** CONVERTER **********/
 		public static implicit operator DictModel (string s)
 		{
-			return (JsonConvert.DeserializeObject<DictModel> (s));
+			return (s != null && s != "") ? JsonConvert.DeserializeObject<DictModel> (s) : new DictModel ();
 		}
 
 
