@@ -62,7 +62,7 @@ namespace Fox
 
 		public int i (string key, bool shouldRemove = false)
 		{
-			int give = int.Parse (this [key].ToString ());
+			int give = (this.ContainsKey (key)) ? int.Parse (this [key].ToString ()) : default (int);
 			if (shouldRemove)
 				this.Remove (key);
 			return give;

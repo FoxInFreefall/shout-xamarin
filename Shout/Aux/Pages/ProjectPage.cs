@@ -17,9 +17,9 @@ namespace Shout
 			NavigationPage.SetTitleIcon (this, "no_icon");
 			BackgroundColor = Color.White;
 
-			Children.Add (new TaskListFragment { Title = "To Do", BindingContext = model });
-			Children.Add (new TaskListFragment { Title = "Doing", BindingContext = model });
-			Children.Add (new TaskListFragment { Title = "Done", BindingContext = model });
+			Children.Add (new TaskListFragment (model, "todo") { Title = "To Do" });
+			Children.Add (new TaskListFragment (model, "doing") { Title = "Doing" });
+			Children.Add (new TaskListFragment (model, "done") { Title = "Done" });
 
 			SelectedItem = Children [1];
 		}

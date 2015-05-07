@@ -35,10 +35,12 @@ namespace Shout
 			Content.AddView (list, 0, 0, 1, 1);
 
 			leaveProjectButton = ButtonFactory.Make ("-");
+			leaveProjectButton.TextColor = Color.White;
 			leaveProjectButton.Clicked += (sender, e) => LeaveProjectPressed ();
 			Content.AddView (leaveProjectButton, 0.4, -75, 50, 50);
 
 			addProjectButton = ButtonFactory.Make ("+");
+			addProjectButton.TextColor = Color.White;
 			addProjectButton.Clicked += async (sender, e) => await ShowProjectForm ();
 			Content.AddView (addProjectButton, 0.6, -75, 50, 50);
 		}

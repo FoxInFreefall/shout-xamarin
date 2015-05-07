@@ -81,17 +81,14 @@ namespace Shout
 			return await MakeRequestAsync (Globals.INVITATIONS_URI, dict, RequestMethod.POST);
 		}
 
-		public async Task<DictModel> CreateTask (TaskModel task)
+		public async Task<DictModel> CreateTask (DictModel taskDict)
 		{
-			//TODO: is there a way to bake this in?
-			if (task.ProjectId == default(int))
-				throw new Exception ("Task doesn't belong to a project: aborting save.");
-			
 			DictModel dict = new DictModel ("task");
-			dict.Add ("title", task.Title);
-			dict.Add ("description", task.Description);
+			dict.Add ("title", taskDict.s ("title"));
+			dict.Add ("description", taskDict.s ("description"));
+			dict.Add ("list", taskDict.s ("list"));
 
-			string uri = Globals.PROJECTS_URI + "/" + task.ProjectId + "/" + Globals.TASKS_URI;
+			string uri = Globals.PROJECTS_URI + "/" + taskDict.i ("project_id") + "/" + Globals.TASKS_URI;
 			return await MakeRequestAsync (uri, dict, RequestMethod.POST);
 		}
 

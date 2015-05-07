@@ -26,7 +26,7 @@ namespace Fox
 			};
 
 			var tap = new TapGestureRecognizer ();
-			tap.Tapped += async (sender, e) => await RemoveForm ();
+//			tap.Tapped += async (sender, e) => await RemoveForm ();
 			obscure.GestureRecognizers.Add (tap);
 
 			Content.AddView (obscure);
@@ -44,7 +44,7 @@ namespace Fox
 
 			form.Opacity = 0;
 
-			await obscure.FadeTo (0.6, fadeTime);
+//			await obscure.FadeTo (0.6, fadeTime);
 			await form.FadeTo (1, fadeTime, Easing.CubicOut);
 
 			var response = await v.GetResponse ();
@@ -60,18 +60,8 @@ namespace Fox
 				await form.FadeTo (0, fadeTime, Easing.CubicIn);
 				Content.Children.Remove (form);
 			}
-			await obscure.FadeTo (0, fadeTime);
+//			await obscure.FadeTo (0, fadeTime);
 			Content.LowerChild (obscure);
-		}
-
-		public void SendObject (object obj)
-		{
-			ReceivedObject (obj);
-		}
-
-		protected virtual void ReceivedObject (object obj)
-		{
-
 		}
 	}
 }

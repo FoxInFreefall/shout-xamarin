@@ -85,15 +85,8 @@ namespace Shout
 			await Instance.Navigation.PushModalAsync (page);
 		}
 
-		public static async Task PopModalPage (object passBack = null)
+		public static async Task PopModalPage ()
 		{
-			if (passBack != null) {
-				var stack = Instance.Navigation.NavigationStack;
-				var previousPage = (stack.Count > 1) ? stack [stack.Count - 2] : null;
-				if (previousPage is BasePage)
-					(previousPage as BasePage).SendObject (passBack);
-			}
-				
 			await Instance.Navigation.PopModalAsync ();
 		}
 
@@ -158,14 +151,17 @@ namespace Shout
 			return !response.ToString ().Contains ("errors:");
 		}
 
-		public static async Task<TaskModel> SaveTask (TaskModel task)
+		public static async Task<TaskModel> CreateTask (DictModel taskDict, ProjectModel project)
 		{
-			DictModel response;
-			if (task.Id == default(int))
-				response = await Instance.ApiManager.CreateTask (task);
-			else
-				response = await Instance.ApiManager.UpdateTask (task);
-			response.EnsureValid ();
+			taskDict.Add ("project_id", project.Id);
+			DictModel response = await Instance.ApiManager.CreateTask (taskDict);
+			var task = project.AddTask (response.s ("task"), taskDict.s ("list"));
+			return task;
+		}
+
+		public static async Task<TaskModel> UpdateTask (TaskModel task)
+		{
+			DictModel response = await Instance.ApiManager.UpdateTask (task);
 
 			return task;
 		}
