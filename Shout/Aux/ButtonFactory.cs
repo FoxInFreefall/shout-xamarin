@@ -20,6 +20,7 @@ namespace Shout
 			product.BorderColor = Template.BorderColor;
 			product.BorderRadius = Template.BorderRadius;
 			product.BorderWidth = Template.BorderWidth;
+			product.TextColor = Template.TextColor;
 			product.Text = text;
 			return product;
 		}

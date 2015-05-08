@@ -33,6 +33,7 @@ namespace Shout
 
 			ButtonFactory.Template.BackgroundColor = Color.Gray;
 			ButtonFactory.Template.BorderRadius = 5;
+			ButtonFactory.Template.TextColor = Color.White;
 
 			if (ApiManager.AuthenticationToken != "")
 				UseRootPage (new RootSessionPage ());
@@ -152,6 +153,7 @@ namespace Shout
 		{
 			DictModel response = await Instance.ApiManager.AcceptInvitation (project.Id);
 			App.User.JoinPotentialProject (project);
+			project.AddMember (App.User);
 		}
 
 		public static async Task DeclineInvitation (ProjectModel project)

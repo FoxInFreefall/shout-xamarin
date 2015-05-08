@@ -33,6 +33,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\InvitationPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Forms\InvitationForm.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Forms\RegistrationForm.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\MemberListPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Aux\" />

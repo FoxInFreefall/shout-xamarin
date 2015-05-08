@@ -47,6 +47,7 @@ namespace Shout
 
 			projectActionList = new ListView {
 				ItemsSource = new List<Label> {
+					new Label { Text = "Member list" },
 					new Label { Text = "Invite user to project" }
 				},
 				SeparatorColor = Color.Gray,
@@ -60,7 +61,7 @@ namespace Shout
 				})
 			);
 			projectActionList.BackgroundColor = Color.FromHex ("F6B11A");
-			projectActionList.HeightRequest = 45;
+			projectActionList.HeightRequest = 89;
 
 
 
@@ -110,9 +111,19 @@ namespace Shout
 			if (a != null) {
 				root.IsPresented = false;
 				sender.SelectedItem = null;
-				if (a.Text == "Invite user to project") {
-					var theTabbedPage = (root.Detail as NavigationPage).CurrentPage as TabbedPage;
-					var theCurrentestPage = theTabbedPage.CurrentPage as BasePage;
+				//TODO: don't check by title
+				if (a.Text == "Member list") {
+					var memberListPage = MakeNavPage (new MemberListPage (projectContext));
+					PageSelectedCallback.Invoke (memberListPage);
+				} else if (a.Text == "Invite user to project") {
+					var currentPage = (root.Detail as NavigationPage).CurrentPage;
+					BasePage theCurrentestPage;
+					if (currentPage is TabbedPage) {
+						var theTabbedPage = currentPage as TabbedPage;
+						theCurrentestPage = theTabbedPage.CurrentPage as BasePage;
+					} else {
+						theCurrentestPage = currentPage as BasePage;
+					}
 
 					//TODO: WHAT'S THIS??
 //					theTabbedPage.ToolbarItems

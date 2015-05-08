@@ -26,6 +26,12 @@ namespace Shout
 
 		public UserModel () { }
 
+		public UserModel (DictModel dict) 
+		{ 
+			Id = dict.i ("id");
+			Email = dict.s ("email");
+		}
+
 		public void UpdateWithJson (string json)
 		{
 			DictModel dict = json;
