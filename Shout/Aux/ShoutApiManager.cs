@@ -126,5 +126,20 @@ namespace Shout
 		{
 			return await MakeRequestAsync (Globals.PROJECTS_URI + "/" + projectId + "/" + Globals.DECLINE_INVITATION_URI, null, RequestMethod.DELETE);
 		}
+
+		public async Task<DictModel> AddUserToTask (int projectId, int taskId, int userId)
+		{
+			DictModel dict = new DictModel ("user");
+			dict.Add ("id", userId);
+
+			string uri = Globals.PROJECTS_URI + "/" + projectId + "/" + Globals.TASKS_URI + "/" + taskId + "/" + Globals.ASSIGNMENTS_URI;
+			return await MakeRequestAsync (uri, dict, RequestMethod.POST);
+		}
+
+		public async Task<DictModel> RemoveUserFromTask (int projectId, int taskId, int userId)
+		{
+			string uri = Globals.PROJECTS_URI + "/" + projectId + "/" + Globals.TASKS_URI + "/" + taskId + "/" + Globals.ASSIGNMENTS_URI + "/" + userId;
+			return await MakeRequestAsync (uri, null, RequestMethod.DELETE);
+		}
 	}
 }

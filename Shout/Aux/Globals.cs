@@ -14,6 +14,7 @@ namespace Shout
 		public static readonly string DECLINE_INVITATION_URI = "decline";
 		public static readonly string COLLABORATION_URI = "collaboration";
 		public static readonly string TASKS_URI = "tasks";
+		public static readonly string ASSIGNMENTS_URI = "assignments";
 	}
 }
 

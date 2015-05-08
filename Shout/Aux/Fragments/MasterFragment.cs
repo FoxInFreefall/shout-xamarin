@@ -15,7 +15,7 @@ namespace Shout
 		private static ListView projectActionList;
 		private Page[] cache;
 
-		private static ProjectModel projectContext;
+		public static ProjectModel projectContext { get; private set; }
 
 		public MasterFragment (RootSessionPage root, Action<Page> PageSelected)
 		{

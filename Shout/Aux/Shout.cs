@@ -162,6 +162,20 @@ namespace Shout
 			Debug.WriteLine (response.ToString ());
 			App.User.RemovePotentialProject (project);
 		}
+
+		public static async Task AddUserToTask (ProjectModel project, TaskModel task, UserModel user)
+		{
+			DictModel response = await Instance.ApiManager.AddUserToTask (project.Id, task.Id, user.Id);
+			response.EnsureValid ();
+			task.AddMember (user);
+		}
+
+		public static async Task RemoveUserFromTask (ProjectModel project, TaskModel task, UserModel user)
+		{
+			DictModel response = await Instance.ApiManager.RemoveUserFromTask (project.Id, task.Id, user.Id);
+			response.EnsureValid ();
+			task.RemoveMember (user);
+		}
 	}
 }
 

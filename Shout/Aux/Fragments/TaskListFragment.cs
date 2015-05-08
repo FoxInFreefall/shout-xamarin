@@ -60,9 +60,11 @@ namespace Shout
 
 		private async Task TaskSelected (ListView sender)
 		{
-			var p = (sender.SelectedItem as TaskModel);
-			if (p != null) {
-				Debug.WriteLine ("Selected task: " + p.Title);
+			var t = (sender.SelectedItem as TaskModel);
+			if (t != null) {
+				sender.SelectedItem = null;
+				Debug.WriteLine ("Selected task: " + t.Title);
+				await Navigation.PushAsync (new TaskPage (t));
 			}
 		}
 	}

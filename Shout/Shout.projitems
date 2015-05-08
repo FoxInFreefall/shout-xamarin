@@ -34,6 +34,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Forms\InvitationForm.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Forms\RegistrationForm.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\MemberListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\TaskPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Forms\TaskMemberForm.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Aux\" />

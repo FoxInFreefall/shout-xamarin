@@ -64,7 +64,7 @@ namespace Shout
 				list = _TasksDone;
 
 			if (list != null) {
-				var task = new TaskModel (dict);
+				var task = new TaskModel (dict, Members);
 				list.Add (task);
 				return task;
 			}
