@@ -76,6 +76,7 @@ namespace Shout
 			};
 			utilityList.ItemSelected += (sender, e) => UtilitySelected (sender as ListView);
 			Content.AddView (utilityList, 0, -45, 1);
+			utilityList.BackgroundColor = Color.White;
 		}
 
 		private void LoadCache ()
@@ -115,7 +116,6 @@ namespace Shout
 
 					//TODO: WHAT'S THIS??
 //					theTabbedPage.ToolbarItems
-//					theTabbedPage.IsBusy
 
 					DictModel response = await theCurrentestPage.OverlayForm (new InvitationForm (projectContext));
 					if (response != null) {

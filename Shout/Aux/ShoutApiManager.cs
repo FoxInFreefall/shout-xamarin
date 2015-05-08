@@ -44,13 +44,18 @@ namespace Shout
 			ClearAuthenticationToken ();
 		}
 
-		public async Task<DictModel> Register (string email, string password)
+		public async Task<DictModel> Register (string email, string password, string username)
 		{
 			DictModel dict = new DictModel ("user");
 			dict.Add ("email", email);
 			dict.Add ("password", password);
+//			dict.Add ("username", username);
 
-			return await MakeRequestAsync (Globals.USERS_URI, dict, RequestMethod.POST);
+			DictModel response = await MakeRequestAsync (Globals.USERS_URI, dict, RequestMethod.POST);
+			response.EnsureValid ();
+			string authentication_token = response.d ("user").s ("authentication_token", true);
+			RegisterAuthenticationToken (authentication_token);
+			return response;
 		}
 
 		public async Task<DictModel> CreateProject (string projectName)

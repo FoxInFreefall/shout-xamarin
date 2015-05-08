@@ -71,7 +71,14 @@ namespace Fox
 			}
 
 			currentlyServing++;
-			return await response.Content.ReadAsStringAsync();
+			DictModel dict = null;
+			try {
+				dict = await response.Content.ReadAsStringAsync ();
+			} catch {
+				dict = new DictModel ();
+			}
+			dict.Add ("status_code", response.IsSuccessStatusCode);
+			return dict;
 		}
 
 

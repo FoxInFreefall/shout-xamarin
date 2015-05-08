@@ -12,7 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Models\ProjectModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Models\UserModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\LandingPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\RegistrationPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\ButtonFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Globals.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Shout.cs" />
@@ -33,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Forms\TaskForm.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Pages\InvitationPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aux\Forms\InvitationForm.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aux\Forms\RegistrationForm.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Aux\" />

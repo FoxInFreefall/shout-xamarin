@@ -95,13 +95,14 @@ namespace Shout
 			UseRootPage (new LandingPage ());
 		}
 
-		public static async Task Register (string email, string password)
+		public static async Task Register (string email, string password, string username)
 		{
-			//TODO: fix
-			DictModel response = await Instance.ApiManager.Register (email, password);
+			DictModel response = await Instance.ApiManager.Register (email, password, username);
+			Debug.WriteLine ("Register response: " + response.ToString ());
 			response.EnsureValid ();
 
 			User.UpdateWithJson (response.s ("user"));
+			UseRootPage (new RootSessionPage ());
 		}
 
 		public static async Task<ProjectModel> CreateProject (string projectName)

@@ -78,8 +78,28 @@ namespace Fox
 
 		public void EnsureValid ()
 		{
-			if (ContainsKey ("error"))
-				throw new Exception (s ("message"));
+			if (ContainsKey ("error")) {
+				Debug.WriteLine (ToString ());
+				if (ContainsKey ("message"))
+					throw new Exception (s ("message"));
+				else
+					throw new Exception (s ("error"));
+			} else if (ContainsKey ("errors")) {
+				DictModel errors = d ("errors");
+				string subject = null;
+				foreach (var s in errors.Keys) {
+					subject = s;
+					break;
+				}
+				var compaints = errors.l (subject);
+				string firstComplaint = compaints [0].ToString ();
+				string error = subject [0].ToString ().ToUpper () + ((subject.Length > 1) ? subject.Substring (1, subject.Length - 1) : "") + " " + firstComplaint + ".";
+				throw new Exception (error);	
+			} else if (ContainsKey ("status_code") && !b ("status_code")) {
+				Debug.WriteLine (ToString ());
+				throw new Exception ("Something went wrong.");
+			}
+			Remove ("status_code");
 		}
 
 
