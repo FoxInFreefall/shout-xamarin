@@ -5,12 +5,11 @@ using Fox;
 
 namespace Shout
 {
-	public class LoginForm : FormView
+	public class InvitationForm : FormView
 	{
 		private Entry emailEntry;
-		private Entry passwordEntry;
 
-		public LoginForm () : base ()
+		public InvitationForm (ProjectModel project) : base ()
 		{
 			AddView (new BoxView { BackgroundColor = Color.Green });
 
@@ -19,7 +18,7 @@ namespace Shout
 			};
 
 			var title = new Label { 
-				Text = "LOG IN",
+				Text = "INVITE USER TO " + project.Name,
 				VerticalOptions = LayoutOptions.Center,
 				FontAttributes = FontAttributes.Bold,
 				FontSize = 25
@@ -30,12 +29,10 @@ namespace Shout
 				Padding = new Thickness (15, 7),
 				VerticalOptions = LayoutOptions.CenterAndExpand
 			};
-			emailEntry = new Entry { Placeholder = "email", Keyboard = Keyboard.Email };
-			passwordEntry = new Entry { Placeholder = "password", IsPassword = true };
-			emailEntry.Completed += (sender, e) => passwordEntry.Focus ();
-			passwordEntry.Completed += (sender, e) => Submit ();
+			emailEntry = new Entry { Placeholder = "Email", Keyboard = Keyboard.Email };
+			emailEntry.Completed += (sender, e) => Submit ();
+
 			fields.Children.Add (emailEntry);
-			fields.Children.Add (passwordEntry);
 			form.Children.Add (fields);
 
 			var buttons = new BaseRelativeLayout ();
@@ -45,7 +42,7 @@ namespace Shout
 			cancelButton.Clicked += (sender, e) => Cancel ();
 			buttons.AddView (cancelButton, 0.25, 0, 0.47, 40);
 
-			var submitButton = ButtonFactory.Make ("Log in");
+			var submitButton = ButtonFactory.Make ("Invite");
 			submitButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
 			submitButton.Clicked += (sender, e) => Submit ();
 			buttons.AddView (submitButton, 0.75, 0, 0.47, 40);
@@ -64,7 +61,6 @@ namespace Shout
 
 			DictModel dict = new DictModel ();
 			dict.Add ("email", emailEntry.Text);
-			dict.Add ("password", passwordEntry.Text);
 
 			return dict;
 		}

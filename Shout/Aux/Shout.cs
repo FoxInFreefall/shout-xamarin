@@ -63,31 +63,7 @@ namespace Shout
 
 		public static void UseRootPage (Page page)
 		{
-			Instance.MainPage = new NavigationPage (page) {
-				BarBackgroundColor = Color.FromHex ("F6B11A"),
-				BarTextColor = Color.White
-			};
-			Instance.Navigation = Instance.MainPage.Navigation;
-		}
-
-		public static async Task GotoPage (Page page)
-		{
-			await Instance.Navigation.PushAsync (page);
-		}
-
-		public static async Task PopPage ()
-		{
-			await Instance.Navigation.PopAsync ();
-		}
-
-		public static async Task GotoModalPage (Page page)
-		{
-			await Instance.Navigation.PushModalAsync (page);
-		}
-
-		public static async Task PopModalPage ()
-		{
-			await Instance.Navigation.PopModalAsync ();
+			Instance.MainPage = page;
 		}
 
 
@@ -144,11 +120,10 @@ namespace Shout
 			User.RemoveProject (project);
 		}
 
-		public static async Task<bool> InviteUserToProject (string email, int projectId)
+		public static async Task InviteUserToProject (string email, int projectId)
 		{
-			//TODO: also pls fix
-			var response = await Instance.ApiManager.InviteUserToProject (email, projectId);
-			return !response.ToString ().Contains ("errors:");
+			DictModel response = await Instance.ApiManager.InviteUserToProject (email, projectId);
+			response.EnsureValid ();
 		}
 
 		public static async Task<TaskModel> CreateTask (DictModel taskDict, ProjectModel project)
@@ -164,6 +139,25 @@ namespace Shout
 			DictModel response = await Instance.ApiManager.UpdateTask (task);
 
 			return task;
+		}
+
+		public static async Task UpdateInvitations ()
+		{
+			DictModel response = await Instance.ApiManager.GetInvitations ();
+			App.User.UpdatePotentialProjects (response);
+		}
+
+		public static async Task AcceptInvitation (ProjectModel project)
+		{
+			DictModel response = await Instance.ApiManager.AcceptInvitation (project.Id);
+			App.User.JoinPotentialProject (project);
+		}
+
+		public static async Task DeclineInvitation (ProjectModel project)
+		{
+			DictModel response = await Instance.ApiManager.DeclineInvitation (project.Id);
+			Debug.WriteLine (response.ToString ());
+			App.User.RemovePotentialProject (project);
 		}
 	}
 }

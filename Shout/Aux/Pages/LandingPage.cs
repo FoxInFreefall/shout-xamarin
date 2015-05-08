@@ -25,7 +25,8 @@ namespace Shout
 			buttonGroup.Children.Add (loginButton);
 
 			var regButton = ButtonFactory.Make ("Register");
-			regButton.Clicked += async (sender, e) => await App.GotoPage (new RegistrationPage ());
+			//TODO: make this a form
+//			regButton.Clicked += async (sender, e) => await App.GotoPage (new RegistrationPage ());
 			buttonGroup.Children.Add (regButton);
 
 			Content.AddView (buttonGroup, 0.5, 0.75, 200);

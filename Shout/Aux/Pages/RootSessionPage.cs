@@ -14,7 +14,7 @@ namespace Shout
 			Title = "SHOUT!";
 			NavigationPage.SetTitleIcon (this, "bar_icon");
 		
-			Master = new MasterFragment (PageSelected);
+			Master = new MasterFragment (this, PageSelected);
 			Detail = new ContentPage ();
 
 			//TODO: don't hardcode 1000ms
@@ -29,7 +29,12 @@ namespace Shout
 
 		private void SucceededAutoLogin ()
 		{
-			Detail = new ProjectListPage ();
+			//TODO: use cache
+			Detail = new NavigationPage (new ProjectListPage ()) { 
+				Title = "My Projects",
+				BarBackgroundColor = Color.FromHex ("F6B11A"),
+				BarTextColor = Color.White
+			};
 		}
 
 		private void FailedAutoLogin ()

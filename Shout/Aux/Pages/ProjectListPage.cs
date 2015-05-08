@@ -85,7 +85,8 @@ namespace Shout
 				
 				if (!leaveProjectMode) {
 					sender.SelectedItem = null;
-					await App.GotoPage (new ProjectPage (p));
+					MasterFragment.EnterProjectContext (p);
+					await Navigation.PushAsync (new ProjectPage (p));
 				} else {
 					bool success = await DisplayAlert ("Leaving " + p.Name, "Are you sure you want to leave this project?", "Certainly", "Nevermind");
 					sender.SelectedItem = null;
@@ -95,6 +96,13 @@ namespace Shout
 					}
 				}
 			}
+		}
+
+		protected override void OnAppearing ()
+		{
+			base.OnAppearing ();
+			MasterFragment.ExitProjectContext ();
+			RefreshList ();
 		}
 	}
 }

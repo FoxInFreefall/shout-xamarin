@@ -33,6 +33,7 @@ namespace Shout
 			dict.Add ("password", password);
 
 			DictModel response = await MakeRequestAsync (Globals.SESSIONS_URI, dict, RequestMethod.POST);
+			response.EnsureValid ();
 			string authentication_token = response.d ("user").s ("authentication_token", true);
 			RegisterAuthenticationToken (authentication_token);
 			return response;
@@ -76,9 +77,8 @@ namespace Shout
 		{
 			DictModel dict = new DictModel ("invitation");
 			dict.Add ("email", email);
-			dict.Add ("project_id", projectId.ToString ());
 
-			return await MakeRequestAsync (Globals.INVITATIONS_URI, dict, RequestMethod.POST);
+			return await MakeRequestAsync (Globals.PROJECTS_URI + "/" + projectId + "/" + Globals.INVITATIONS_URI, dict, RequestMethod.POST);
 		}
 
 		public async Task<DictModel> CreateTask (DictModel taskDict)
@@ -105,6 +105,21 @@ namespace Shout
 			//TODO: use dynamic uri's like _path's in Ruby
 			string uri = Globals.PROJECTS_URI + "/" + task.ProjectId + "/" + Globals.TASKS_URI + "/" + task.Id;
 			return await MakeRequestAsync (uri, dict, RequestMethod.PUT);
+		}
+
+		public async Task<DictModel> GetInvitations ()
+		{
+			return await MakeRequestAsync (Globals.INVITATIONS_URI, null, RequestMethod.GET);
+		}
+
+		public async Task<DictModel> AcceptInvitation (int projectId)
+		{
+			return await MakeRequestAsync (Globals.PROJECTS_URI + "/" + projectId + "/" + Globals.ACCEPT_INVITATION_URI, null, RequestMethod.PUT);
+		}
+
+		public async Task<DictModel> DeclineInvitation (int projectId)
+		{
+			return await MakeRequestAsync (Globals.PROJECTS_URI + "/" + projectId + "/" + Globals.DECLINE_INVITATION_URI, null, RequestMethod.DELETE);
 		}
 	}
 }

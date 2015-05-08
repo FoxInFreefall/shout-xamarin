@@ -50,10 +50,12 @@ namespace Shout
 		private async Task AddTask ()
 		{
 			DictModel dict = await OverlayForm (taskForm);
-			dict.Add ("list", listName);
+			if (dict != null) {
+				dict.Add ("list", listName);
 
-			await App.CreateTask (dict, project);
-			list.BeginRefresh ();
+				await App.CreateTask (dict, project);
+				list.BeginRefresh ();
+			}
 		}
 
 		private async Task TaskSelected (ListView sender)

@@ -36,8 +36,25 @@ namespace Shout
 			foreach (var p in dict.l ("projects")) {
 				AddProject (p.ToString ());
 			}
+			UpdatePotentialProjects (dict);
+		}
+
+		public void UpdatePotentialProjects (DictModel dict)
+		{
+			_PotentialProjects.Clear ();
 			foreach (var p in dict.l ("potential_projects"))
 				AddPotentialProject (p.ToString ());
+		}
+
+		public void JoinPotentialProject (ProjectModel project)
+		{
+			_PotentialProjects.Remove (project);
+			_Projects.Add (project);
+		}
+
+		public void RemovePotentialProject (ProjectModel project)
+		{
+			_PotentialProjects.Remove (project);
 		}
 
 		public ProjectModel AddProject (DictModel dict)
